@@ -1,0 +1,37 @@
+# === controllers.yaml ===
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+diff_drive:
+  type: "diff_drive_controller/DiffDriveController"
+
+  # DÙNG DẠNG DANH SÁCH *_wheel_names (ổn định nhất trên Noetic)
+  left_wheel_names:  ['left_main_wheel_joint']
+  right_wheel_names: ['right_main_wheel_joint']
+
+  publish_rate: 50
+  cmd_vel_timeout: 0.5
+  allow_multiple_cmd_vel_publishers: true
+
+  wheel_separation: 0.33
+  wheel_radius: 2.0
+
+  open_loop: true
+  enable_odom_tf: true
+  publish_wheel_data: true
+  publish_cmd: true
+
+  linear:
+    x:
+      has_velocity_limits: true
+      max_velocity: 1.0
+      has_acceleration_limits: true
+      max_acceleration: 2.0
+
+  angular:
+    z:
+      has_velocity_limits: true
+      max_velocity: 2.0
+      has_acceleration_limits: true
+      max_acceleration: 4.0

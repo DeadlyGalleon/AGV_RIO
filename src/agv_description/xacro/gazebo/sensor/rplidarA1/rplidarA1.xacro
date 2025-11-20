@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="gazebo_rplidarA1">
+        <gazebo reference="lidar_link">
+            <kp>100000.0</kp>
+            <kd>100.0</kd>
+            <mu1>1.5</mu1>
+            <mu2>1.5</mu2>
+            <fdir1>1 0 0</fdir1>
+            <maxVel>1.0</maxVel>
+            <minDepth>0.001</minDepth>
+            <material>Gazebo/Grey</material>
+            <sensor type="ray" name="lidar">
+                <update_rate>10</update_rate>
+                <ray>
+          <scan>
+            <horizontal>
+              <!-- 360° mượt: 720 tia (0.5°/tia); có thể tăng lên 1080 nếu cần -->
+              <samples>720</samples>
+              <resolution>1</resolution>                <!-- phải là số nguyên ≥1 -->
+              <min_angle>-3.14159265</min_angle>       <!-- -π -->
+              <max_angle> 3.14159265</max_angle>       <!-- +π -->
+            </horizontal>
+            <!-- KHÔNG có block <vertical> để đảm bảo 1 lớp duy nhất -->
+          </scan>
+
+          <range>
+            <min>0.32</min>        <!-- né self-hit/ nhiễu gần -->
+            <max>6.0</max>         <!-- A1 thường ~6–12 m; bạn để 6.0 ổn -->
+            <resolution>0.01</resolution>
+          </range>
+
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.005</stddev>
+          </noise>
+        </ray>
+                <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_laser.so">
+                    <topicName>/scan</topicName>
+                    <frameName>lidar_link</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>

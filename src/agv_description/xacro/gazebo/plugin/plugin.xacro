@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="gazebo_plugin">
+        <!-- Gazebo -->
+        <gazebo>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+                <robotNamespace>/agv_car</robotNamespace>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,39 @@
+<launch>
+  <arg name="paused"      default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui"         default="true"/>
+  <arg name="headless"    default="false"/>
+  <arg name="debug"       default="false"/>
+
+  <!-- Gọi trực tiếp world trong package agv_description -->
+  <node name="gazebo" pkg="gazebo_ros" type="gzserver" respawn="false" output="screen"
+        args="-e ode $(find agv_description)/worlds/empty.world"/>
+  <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"
+        if="$(arg gui)"/>
+
+  <!-- URDF vào param server -->
+  <param name="agv_car/robot_description"
+         command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_rio_final1.urdf'"/>
+
+  <!-- Spawn robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model agv_car -z 0.042 -param agv_car/robot_description"
+        output="screen"/>
+
+  <!-- Load controllers -->
+  <rosparam ns="/agv_car" file="$(find agv_description)/config/controllers.yaml" command="load"/>
+
+  <group ns="/agv_car">
+    <node name="controller_spawner" pkg="controller_manager" type="spawner"
+          args="joint_state_controller diff_drive_controller"
+          output="screen"/>
+  </group>
+
+  <!-- Teleop -->
+  <node pkg="agv_description" type="wasd_teleop.py" name="wasd_teleop" output="screen">
+    <param name="cmd_vel_topic" value="/agv_car/diff_drive_controller/cmd_vel"/>
+    <param name="rate" value="50"/>
+    <param name="max_linear" value="0.8"/>
+    <param name="max_angular" value="2.0"/>
+  </node>
+</launch>

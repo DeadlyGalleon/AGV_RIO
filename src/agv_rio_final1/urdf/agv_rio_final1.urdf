@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="agv_rio_final1">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.19632704114166 0.000274859310608777 0.0516734999792742"
+        rpy="0 0 0" />
+      <mass
+        value="16.2189269106849" />
+      <inertia
+        ixx="0.0211655547080848"
+        ixy="7.24635315936667E-06"
+        ixz="0.00218360679784617"
+        iyy="1.55552389426171"
+        iyz="5.03726520112408E-07"
+        izz="1.56006535654373" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="lidar_link">
+    <inertial>
+      <origin
+        xyz="-1.52384837190933E-05 -0.000738135964715392 -0.0391037936787011"
+        rpy="0 0 0" />
+      <mass
+        value="0.293916154164647" />
+      <inertia
+        ixx="0.000124611724189048"
+        ixy="-6.31874523970552E-07"
+        ixz="1.03428175818315E-06"
+        iyy="0.000112429945625782"
+        iyz="-3.45080374886285E-07"
+        izz="0.000220404990973963" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/lidar_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/lidar_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.37599032923391 0.00560454991403092 0.304592005075015"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="lidar_link" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="right_main_wheel_link">
+    <inertial>
+      <origin
+        xyz="-1.54765089632747E-13 0.0850000106615442 -1.20459198171829E-13"
+        rpy="0 0 0" />
+      <mass
+        value="0.745812681232109" />
+      <inertia
+        ixx="0.00129469600230131"
+        ixy="1.78659573938796E-15"
+        ixz="6.96702056125284E-08"
+        iyy="0.00139189819473726"
+        iyz="1.54495829032648E-15"
+        izz="0.00129471702318901" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/right_main_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/right_main_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_main_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.496441637210722 -0.250014571629858 0.00999999999638312"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_main_wheel_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      effort="0"
+      velocity="10" />
+  </joint>
+  <link
+    name="left_main_wheel_link">
+    <inertial>
+      <origin
+        xyz="6.06847905260111E-13 0.0850000106603286 -3.7336800318144E-13"
+        rpy="0 0 0" />
+      <mass
+        value="0.745812681232098" />
+      <inertia
+        ixx="0.0012946360965068"
+        ixy="-5.01986749747638E-16"
+        ixz="2.44138403576605E-09"
+        iyy="0.00139189819473726"
+        iyz="-2.21144916392145E-15"
+        izz="0.00129477692898351" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/left_main_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/left_main_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_main_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.496441637210722 0.079985428370142 0.00999999999638312"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_main_wheel_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      effort="0"
+      velocity="10" />
+  </joint>
+  <link
+    name="left_vertical_axis_link">
+    <inertial>
+      <origin
+        xyz="-0.0372299870327363 -0.00118785431913038 -0.0415589638714542"
+        rpy="0 0 0" />
+      <mass
+        value="0.272328125328316" />
+      <inertia
+        ixx="0.000177726451943003"
+        ixy="-7.92842657389801E-07"
+        ixz="-1.30088227970452E-05"
+        iyy="0.000246153410600547"
+        iyz="-1.50645110009221E-07"
+        izz="0.000174459880931324" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/left_vertical_axis_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/left_vertical_axis_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+<joint name="left_vertical_axis_joint" type="continuous">
+  <origin xyz="0.427058362788993 0.181485428370142 0.0490000000031094" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_vertical_axis_link"/>
+  <axis xyz="0 0 1"/>
+  <limit effort="50" velocity="3.0"/>
+  <dynamics damping="0.2" friction="0.0"/>
+</joint>
+  <link
+    name="left_caster_wheel_link">
+    <inertial>
+      <origin
+        xyz="-0.000528707276683082 0.0456462717685031 2.26734230279746E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.212744608501194" />
+      <inertia
+        ixx="0.000121632381646114"
+        ixy="-7.45751390190856E-07"
+        ixz="-7.52535284756864E-11"
+        iyy="0.000186014944986703"
+        iyz="9.14942151999114E-11"
+        izz="0.000121624015939315" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/left_caster_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/left_caster_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_caster_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0394645294813227 -0.0464602078427481 -0.0460000000002857"
+      rpy="0 0 0" />
+    <parent
+      link="left_vertical_axis_link" />
+    <child
+      link="left_caster_wheel_link" />
+    <axis
+      xyz="0.0115823351866676 -0.999932922506117 0" />
+    <limit
+      effort="0"
+      velocity="10" />
+  </joint>
+  <link
+    name="right_vertical_axis_link">
+    <inertial>
+      <origin
+        xyz="-0.0372484187431409 -0.000197355433254276 -0.043558967370807"
+        rpy="0 0 0" />
+      <mass
+        value="0.27232810848691" />
+      <inertia
+        ixx="0.000177732785976777"
+        ixy="1.02732329323296E-06"
+        ixz="-1.30083040668714E-05"
+        iyy="0.00024614716456547"
+        iyz="1.9532356912089E-07"
+        izz="0.000174459758341894" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/right_vertical_axis_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/right_vertical_axis_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+<joint name="right_vertical_axis_joint" type="continuous">
+  <origin xyz="0.427058362788999 -0.181514571629864 0.0490000000030986" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_vertical_axis_link"/>
+  <axis xyz="0 0 1"/>
+  <limit effort="50" velocity="3.0"/>
+  <dynamics damping="0.2" friction="0.0"/>
+</joint>
+  <link
+    name="right_caster_wheel_link">
+    <inertial>
+      <origin
+        xyz="0.000676378335069283 0.0450460860929714 1.66906084508867E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.217124452257966" />
+      <inertia
+        ixx="0.000121991191247687"
+        ixy="9.71012430184508E-07"
+        ixz="-1.458455393309E-10"
+        iyy="0.000186643383873472"
+        iyz="8.28214222028688E-11"
+        izz="0.000121976675731269" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/right_caster_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_rio_final1/meshes/right_caster_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_caster_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0406861124057696 -0.0453942756003061 -0.0480000000002838"
+      rpy="0 0 0" />
+    <parent
+      link="right_vertical_axis_link" />
+    <child
+      link="right_caster_wheel_link" />
+    <axis
+      xyz="-0.0150134947978406 -0.999887291135334 0" />
+    <limit
+      effort="0"
+      velocity="10" />
+  </joint>
+<gazebo>
+  <plugin name="diff_drive_gz" filename="libgazebo_ros_diff_drive.so">
+    <robotNamespace>/agv</robotNamespace>
+
+    <!-- TÊN JOINT CHÍNH XÁC -->
+    <leftJoint>left_main_wheel_joint</leftJoint>
+    <rightJoint>right_main_wheel_joint</rightJoint>
+
+    <!-- KÍCH THƯỚC XE -->
+    <wheelSeparation>0.33</wheelSeparation>
+    <wheelDiameter>0.65</wheelDiameter>  <!-- R = 0.05 m -->
+
+    <!-- TOPIC / FRAME -->
+    <commandTopic>cmd_vel</commandTopic>        <!-- => /agv/cmd_vel -->
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
+    <robotBaseFrame>base_link</robotBaseFrame>
+
+    <!-- TUỲ CHỌN HỮU ÍCH -->
+    <publishTf>true</publishTf>
+    <publishOdom>true</publishOdom>
+    <publishWheelTF>true</publishWheelTF>
+    <publishWheelJointState>true</publishWheelJointState>
+    <updateRate>50</updateRate>
+    <cmdTimeout>0.5</cmdTimeout>
+    <wheelTorque>5.0</wheelTorque>
+  </plugin>
+</gazebo>
+
+
+<transmission name="trans_left_main_wheel">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="left_main_wheel_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="motor_left_rear">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="trans_right_main_wheel">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="right_main_wheel_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="motor_right_rear">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+<!-- bánh sau: ma sát cao -->
+<gazebo reference="left_main_wheel_link"><mu1>1.2</mu1><mu2>1.2</mu2></gazebo>
+<gazebo reference="right_main_wheel_link"><mu1>1.2</mu1><mu2>1.2</mu2></gazebo>
+
+<!-- caster: ma sát thấp một chút để xoay dễ -->
+<gazebo reference="left_caster_wheel_link"><mu1>0.5</mu1><mu2>0.5</mu2></gazebo>
+<gazebo reference="right_caster_wheel_link"><mu1>0.5</mu1><mu2>0.5</mu2></gazebo>
+
+<gazebo reference="lidar_link">
+  <sensor type="ray" name="lidar_sensor_360">
+    <pose>0 0 0 0 0 0</pose>
+    <update_rate>15</update_rate>
+    <visualize>false</visualize>  <!-- VẼ TIA TRONG GAZEBO -->
+
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>1440</samples>
+          <resolution>1</resolution>
+          <min_angle>-3.14159265</min_angle>
+          <max_angle> 3.14159265</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.12</min>
+        <max>12.0</max>
+        <resolution>0.01</resolution>
+      </range>
+      <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.01</stddev>
+      </noise>
+    </ray>
+
+    <!-- plugin ROS để xuất /agv/scan, giữ nguyên như bạn đang dùng -->
+    <plugin name="gazebo_ros_laser" filename="libgazebo_ros_laser.so">
+      <topicName>/agv/scan</topicName>
+      <frameName>lidar_link</frameName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+
+</robot>

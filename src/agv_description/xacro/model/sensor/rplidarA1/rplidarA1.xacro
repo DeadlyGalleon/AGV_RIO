@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="rplidarA1">
+    <link name="lidar_link">
+      <inertial>
+        <origin xyz="-1.52384838150166E-05 -0.000738135964715392 -0.039103793678701" rpy="0 0 0"/>
+        <mass value="0.293916154164646"/>
+        <inertia ixx="0.000124611724189049" ixy="-6.31874523970842E-07" ixz="1.03428175818311E-06"
+                 iyy="0.000112429945625781" iyz="-3.45080374886339E-07" izz="0.000220404990973963"/>
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry><mesh filename="package://agv_description/meshes/lidar_link.STL"/></geometry>
+        <material name="grey"><color rgba="0.2 0.2 0.2 1.0"/></material>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry><mesh filename="package://agv_description/meshes/lidar_link.STL"/></geometry>
+      </collision>
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+      <origin xyz="0.37599032923391 0.00560454991403092 0.304592005075015" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="lidar_link"/>
+    </joint>
+
+    <!-- Sensor ray 1 lớp + plugin ROS -->
+    <gazebo reference="lidar_link">
+      <sensor type="ray" name="lidar">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>  <!-- A1 ~5.5–10 Hz -->
+
+        <ray>
+          <scan>
+            <horizontal>
+              <!-- 360° mượt: 720 tia (0.5°/tia); có thể tăng lên 1080 nếu cần -->
+              <samples>720</samples>
+              <resolution>1</resolution>                <!-- phải là số nguyên ≥1 -->
+              <min_angle>-3.14159265</min_angle>       <!-- -π -->
+              <max_angle> 3.14159265</max_angle>       <!-- +π -->
+            </horizontal>
+            <!-- KHÔNG có block <vertical> để đảm bảo 1 lớp duy nhất -->
+          </scan>
+
+          <range>
+            <min>0.32</min>        <!-- né self-hit/ nhiễu gần -->
+            <max>6.0</max>         <!-- A1 thường ~6–12 m; bạn để 6.0 ổn -->
+            <resolution>0.01</resolution>
+          </range>
+
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.005</stddev>
+          </noise>
+        </ray>
+
+        <plugin name="gazebo_ros_laser" filename="libgazebo_ros_laser.so">
+          <!-- Không đặt dấu / đầu để hưởng namespace robot -->
+          <topicName>scan</topicName>
+          <frameName>lidar_link</frameName>
+          <updateRate>10</updateRate>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>

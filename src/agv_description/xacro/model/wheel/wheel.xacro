@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="wheel">
+        <link name="right_main_wheel_link">
+            <inertial>
+                <origin xyz="-1.54765089632747E-13 0.0850000106615442 -1.20459198171829E-13" rpy="0 0 0" />
+                <mass value="0.745812681232109" />
+                <inertia ixx="0.00129469600230131" ixy="1.7865957393857E-15" ixz="6.96702056125284E-08" iyy="0.00139189819473726" iyz="1.54495829032874E-15" izz="0.00129471702318901" />
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/right_main_wheel_link.STL" />
+                </geometry>
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/right_main_wheel_link.STL" />
+                </geometry>
+            </collision>
+        </link>
+        <joint name="right_main_wheel_joint" type="continuous">
+            <origin xyz="-0.496441637210722 -0.250014571629858 0.00999999999638312" rpy="0 0 0" />
+            <parent link="base_link" />
+            <child link="right_main_wheel_link" />
+            <axis xyz="0 -1 0" />
+            <limit effort="0" velocity="10" />
+        </joint>
+        <link name="left_main_wheel_link">
+            <inertial>
+                <origin xyz="6.06847905260111E-13 0.0850000106603286 -3.73256980878978E-13" rpy="0 0 0" />
+                <mass value="0.745812681232098" />
+                <inertia ixx="0.0012946360965068" ixy="-5.01986749747639E-16" ixz="2.44138403576605E-09" iyy="0.00139189819473726" iyz="-2.21144916392371E-15" izz="0.00129477692898351" />
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/left_main_wheel_link.STL" />
+                </geometry>
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/left_main_wheel_link.STL" />
+                </geometry>
+            </collision>
+        </link>
+        <joint name="left_main_wheel_joint" type="continuous">
+            <origin xyz="-0.496441637210722 0.079985428370142 0.00999999999638312" rpy="0 0 0" />
+            <parent link="base_link" />
+            <child link="left_main_wheel_link" />
+            <axis xyz="0 -1 0" />
+            <limit effort="0" velocity="10" />
+        </joint>
+        <link name="right_front_wheel_link">
+            <inertial>
+                <origin xyz="0.000676378335069394 0.0450460860929714 1.66906084508867E-08" rpy="0 0 0" />
+                <mass value="0.217124452257966" />
+                <inertia ixx="0.000121991191247687" ixy="9.71012430184508E-07" ixz="-1.4584553933088E-10" iyy="0.000186643383873472" iyz="8.28214222028593E-11" izz="0.000121976675731269" />
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/right_front_wheel_link.STL" />
+                </geometry>
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/right_front_wheel_link.STL" />
+                </geometry>
+            </collision>
+        </link>
+        <joint name="right_front_wheel_joint" type="continuous">
+            <origin xyz="0.386372250383229 -0.22690884723017 0.00100000000281475" rpy="0 0 0" />
+            <parent link="base_link" />
+            <child link="right_front_wheel_link" />
+            <axis xyz="-0.0150134947978406 -0.999887291135334 0" />
+        </joint>
+        <link name="left_front_wheel_link">
+            <inertial>
+                <origin xyz="-0.000521779881353157 0.0450481377135437 2.2837272406484E-08" rpy="0 0 0" />
+                <mass value="0.217124482379157" />
+                <inertia ixx="0.000121985204093452" ixy="-7.49011365935949E-07" ixz="-6.75979531643611E-11" iyy="0.000186649290119805" iyz="1.27959798311389E-10" izz="0.000121976809291945" />
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/left_front_wheel_link.STL" />
+                </geometry>
+                <material name="black">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://agv_description/meshes/left_front_wheel_link.STL" />
+                </geometry>
+            </collision>
+        </link>
+        <joint name="left_front_wheel_joint" type="continuous">
+            <origin xyz="0.387593833307685 0.135025220527393 0.00100000000282352" rpy="0 0 0" />
+            <parent link="base_link" />
+            <child link="left_front_wheel_link" />
+            <axis xyz="0.0115823351866677 -0.999932922506117 0" />
+        </joint>
+    </xacro:macro>
+</robot>

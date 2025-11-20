@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="agv_car">
+
+  <!-- Gazebo -->
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/agv_car</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>1.0</maxVel>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <gazebo reference="lidar_link">
+  <!-- (các thông số vật lý/ma sát có thể giữ nguyên hoặc bỏ) -->
+  <sensor type="ray" name="lidar">
+    <!-- vị trí cảm biến trên link (nếu cần) -->
+
+    <!-- BẮT BUỘC để Gazebo vẽ chùm tia -->
+    <visualize>true</visualize>
+    <update_rate>10</update_rate>
+
+     <ray>
+          <scan>
+            <horizontal>
+              <!-- 360° mượt: 720 tia (0.5°/tia); có thể tăng lên 1080 nếu cần -->
+              <samples>720</samples>
+              <resolution>1</resolution>                <!-- phải là số nguyên ≥1 -->
+              <min_angle>-3.14159265</min_angle>       <!-- -π -->
+              <max_angle> 3.14159265</max_angle>       <!-- +π -->
+            </horizontal>
+            <!-- KHÔNG có block <vertical> để đảm bảo 1 lớp duy nhất -->
+          </scan>
+
+          <range>
+            <min>0.32</min>        <!-- né self-hit/ nhiễu gần -->
+            <max>6.0</max>         <!-- A1 thường ~6–12 m; bạn để 6.0 ổn -->
+            <resolution>0.01</resolution>
+          </range>
+
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.005</stddev>
+          </noise>
+        </ray>
+
+    <plugin name="gazebo_ros_laser" filename="libgazebo_ros_laser.so">
+      <topicName>/scan</topicName>
+      <frameName>lidar_link</frameName>
+      <!-- tùy chọn, giúp đồng bộ tốc độ publish -->
+      <updateRate>10</updateRate>
+      <alwaysOn>true</alwaysOn>
+    </plugin>
+  </sensor>
+</gazebo>
+
+
+  <gazebo reference="right_main_wheel_link">
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>1.0</maxVel>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="left_main_wheel_link">
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>1.0</maxVel>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="right_front_wheel_link">
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>1.0</maxVel>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="left_front_wheel_link">
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <mu1>1.5</mu1>
+    <mu2>1.5</mu2>
+    <fdir1>1 0 0</fdir1>
+    <maxVel>1.0</maxVel>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.192290573236363 0.000273206227342948 0.0514683977225685" rpy="0 0 0" />
+      <mass value="16.3293342103243" />
+      <inertia ixx="0.0212770375492799" ixy="7.25883413651117E-06" ixz="0.00215758988773764" iyy="1.55564290216292" iyz="5.48192673600604E-07" izz="1.56017032270012" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/base_link.STL" />
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.0 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <link name="lidar_link">
+    <inertial>
+      <origin xyz="-1.52384838150166E-05 -0.000738135964715392 -0.039103793678701" rpy="0 0 0" />
+      <mass value="0.293916154164646" />
+      <inertia ixx="0.000124611724189049" ixy="-6.31874523970842E-07" ixz="1.03428175818311E-06" iyy="0.000112429945625781" iyz="-3.45080374886339E-07" izz="0.000220404990973963" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/lidar_link.STL" />
+      </geometry>
+      <material name="grey">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/lidar_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.37599032923391 0.00560454991403092 0.304592005075015" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lidar_link" />
+    <axis xyz="0 0 0" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+  </joint>
+
+
+  <link name="right_main_wheel_link">
+    <inertial>
+      <origin xyz="-1.54765089632747E-13 0.0850000106615442 -1.20459198171829E-13" rpy="0 0 0" />
+      <mass value="0.745812681232109" />
+      <inertia ixx="0.00129469600230131" ixy="1.7865957393857E-15" ixz="6.96702056125284E-08" iyy="0.00139189819473726" iyz="1.54495829032874E-15" izz="0.00129471702318901" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/right_main_wheel_link.STL" />
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/right_main_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="right_main_wheel_joint" type="continuous">
+    <origin xyz="-0.496441637210722 -0.250014571629858 0.00999999999638312" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="right_main_wheel_link" />
+    <axis xyz="0 -1 0" />
+    <limit effort="0" velocity="10" />
+  </joint>
+  <link name="left_main_wheel_link">
+    <inertial>
+      <origin xyz="6.06847905260111E-13 0.0850000106603286 -3.73256980878978E-13" rpy="0 0 0" />
+      <mass value="0.745812681232098" />
+      <inertia ixx="0.0012946360965068" ixy="-5.01986749747639E-16" ixz="2.44138403576605E-09" iyy="0.00139189819473726" iyz="-2.21144916392371E-15" izz="0.00129477692898351" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/left_main_wheel_link.STL" />
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/left_main_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="left_main_wheel_joint" type="continuous">
+    <origin xyz="-0.496441637210722 0.079985428370142 0.00999999999638312" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="left_main_wheel_link" />
+    <axis xyz="0 -1 0" />
+    <limit effort="0" velocity="10" />
+  </joint>
+  <link name="right_front_wheel_link">
+    <inertial>
+      <origin xyz="0.000676378335069394 0.0450460860929714 1.66906084508867E-08" rpy="0 0 0" />
+      <mass value="0.217124452257966" />
+      <inertia ixx="0.000121991191247687" ixy="9.71012430184508E-07" ixz="-1.4584553933088E-10" iyy="0.000186643383873472" iyz="8.28214222028593E-11" izz="0.000121976675731269" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/right_front_wheel_link.STL" />
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/right_front_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="right_front_wheel_joint" type="continuous">
+    <origin xyz="0.386372250383229 -0.22690884723017 0.00100000000281475" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="right_front_wheel_link" />
+    <axis xyz="-0.0150134947978406 -0.999887291135334 0" />
+  </joint>
+  <link name="left_front_wheel_link">
+    <inertial>
+      <origin xyz="-0.000521779881353157 0.0450481377135437 2.2837272406484E-08" rpy="0 0 0" />
+      <mass value="0.217124482379157" />
+      <inertia ixx="0.000121985204093452" ixy="-7.49011365935949E-07" ixz="-6.75979531643611E-11" iyy="0.000186649290119805" iyz="1.27959798311389E-10" izz="0.000121976809291945" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/left_front_wheel_link.STL" />
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://agv_description/meshes/left_front_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="left_front_wheel_joint" type="continuous">
+    <origin xyz="0.387593833307685 0.135025220527393 0.00100000000282352" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="left_front_wheel_link" />
+    <axis xyz="0.0115823351866677 -0.999932922506117 0" />
+  </joint>
+</robot>
